@@ -22,7 +22,7 @@ docker-compose down
 docker-compose down -v
 
 Project demo video:
-![project demo](./assets/ticket-booking-demo.gif)
+![project demo](./Assets/ticket-booking-demo.gif)
 
 Jenkins:
 Used to automate build,test and deploy.
