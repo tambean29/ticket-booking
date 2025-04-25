@@ -17,9 +17,8 @@ services:
     command: ["./wait-for.sh", "db:3306", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
     depends_on:
       - db
-    volumes:
-      - ./project:/app
-      - ./wait-for.sh:/app/wait-for.sh
+    # volumes:
+    #   - ./wait-for.sh:/app/wait-for.sh
     ports:
       - "8000:8000"
     environment:

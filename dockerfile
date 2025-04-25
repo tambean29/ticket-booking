@@ -6,6 +6,9 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app
 
+COPY wait-for.sh /app/wait-for.sh
+RUN chmod +x /app/wait-for.sh
+
 COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
