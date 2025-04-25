@@ -39,3 +39,6 @@ To run the project using Jenkins:
 5. In the Repository URL field provide "https://github.com/tambean29/ticket-booking"
 6. Under branch to build field provide "*/main"
 7. Under Script Path field provide "Jenkinsfile"
+8. Now click Save.
+9. Click Build Now.
+After successfull completion of pipeline the app will be available on http://localhost:8000    
