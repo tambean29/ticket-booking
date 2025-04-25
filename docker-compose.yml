@@ -1,4 +1,4 @@
-
+version: '3.9'
 
 services:
   db:
@@ -6,27 +6,28 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: ticketbooking_db
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     ports:
-      - "3307:3306" 
+      - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
 
-  
   web:
-    build: .
-    command: ["./wait-for.sh", "db:3306", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
-    depends_on:
-      - db
-    # volumes:
-    #   - ./wait-for.sh:/app/wait-for.sh
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+    volumes:
+      - ./project:/app
     ports:
       - "8000:8000"
-    environment:
-      - DATABASE_HOST=db
-      - DATABASE_NAME=ticketbooking_db
-      - DATABASE_USER=root
-      - DATABASE_PASSWORD=your_password
-
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   mysql-data:
