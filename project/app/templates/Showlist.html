@@ -1,0 +1,26 @@
+{% extends "Home.html" %}
+{% block content %}
+    <ul>
+        {% if shows %}
+            {% for show in shows %}
+                <li>
+                    <p>Name - {{ show.show_name }}</p>
+                    <p>Time - {{ show.show_time }}</p>
+                    <p>Date - {{ show.show_date }}</p>
+                    <p>Vacancy - {{show.available_seats}}</p>
+                    {% if user.userprofile.is_admin %}
+                        <a href=" {% url 'remove_show' show.id %}">remove</a>
+                    {% endif %}
+                    <a href="{% url 'history' show.id %}">Book</a>
+                </li>
+            {% endfor %}
+        {% else %}
+            <p>No shows available</p>
+        {% endif %}
+        {% if user.userprofile.is_admin %}
+                <a href="{% url 'add_show' %}">Add Show</a>
+                
+        {% endif %}
+        <a href="{% url 'history' %}">History</a>
+    </ul>
+{% endblock %}

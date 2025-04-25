@@ -1,0 +1,19 @@
+{% extends "Home.html" %}
+{% block content%}
+<ul>
+    {% if history %}
+        {% for show in history %}
+            <li>
+                <p>Name - {{ show.show_name }}</p>
+                <p>Time - {{ show.show_time }}</p>
+                <p>Date - {{ show.show_date }}</p>
+                <p>Show ID - {{ show.id }}</p>
+                {% if show.id %}
+                <a href = "{% url 'cancel_booking' show.id %}"> Cancel </a><br>
+                {% endif %}
+            </li>
+        {% endfor %}
+    {% else %}
+        <p>No shows booked</p>
+    {% endif %}
+{% endblock %}

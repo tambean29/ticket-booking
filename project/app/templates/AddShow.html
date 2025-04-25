@@ -1,0 +1,12 @@
+{% extends "Home.html" %}
+{% block content %}
+    <h1>Add Show</h1>
+    <form method="POST" action="{% url 'add_show' %}">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Show Name" required><br>
+        <input type="text" name="time" placeholder="Show Time" required><br>
+        <input type="date" name="date" placeholder="dd-mm-yyyy" required><br>
+        <input type="number" name="available_seats" placeholder="Available Seats" required><br>
+        <button type="submit">Add Show</button>
+    </form>
+{% endblock %}
